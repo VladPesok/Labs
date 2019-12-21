@@ -1,4 +1,4 @@
-﻿// Lab1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+// Lab1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 
 #include "pch.h"
@@ -44,7 +44,7 @@ void printMap(map_t map)
 	}
 }
 
-void coinCycle(map_t map, std::map<std::string, int> countries)
+void coinCycle(map_t map, std::map<country_t, int> countries)
 {
 
 	if (countries.size() == 0)
@@ -60,8 +60,8 @@ void coinCycle(map_t map, std::map<std::string, int> countries)
 	}
 
 	int checkedCountriesCounter = 0;
-	std::map<std::string, int> checkedCitiesCounts;
-	std::map<std::string, bool> checkedCountries;
+	std::map<country_t, int> checkedCitiesCounts;
+	std::map<country_t, bool> checkedCountries;
 
 	bool checked = false;
 	int days = 0;
@@ -102,7 +102,7 @@ void coinCycle(map_t map, std::map<std::string, int> countries)
 			}
 		}
 
-		for (std::map<std::string, int>::iterator it = checkedCitiesCounts.begin(); it != checkedCitiesCounts.end(); ++it) {
+		for (std::map<country_t, int>::iterator it = checkedCitiesCounts.begin(); it != checkedCitiesCounts.end(); ++it) {
 			if (it->second == countries[it->first])
 			{
 				if (checkedCountries.find(it->first) == checkedCountries.end())
@@ -120,11 +120,8 @@ void coinCycle(map_t map, std::map<std::string, int> countries)
 			{
 				for (int j = 0; j < map[i].size(); j++)
 				{
-					if (map[i][j])
-					{
-						if (map[i][j]->balance.size() > 1) {
+					if (map[i][j] && map[i][j]->balance.size() > 1) {
 							changed = true;
-						}
 					}
 				}
 			}
