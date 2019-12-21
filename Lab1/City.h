@@ -3,6 +3,8 @@
 #include <map>
 #include <vector>
 
+constexpr auto INIT_BALANCE = 1000000;
+
 class City;
 using map_t = std::vector<std::vector<City*>>;
 using country_t = std::string;
@@ -14,19 +16,19 @@ public:
 
 
 	int x, y;
-	country_t country;
+	const country_t country;
 	std::map<country_t, int> balance;
 	std::map<country_t, int> tempBalance;
 	bool checked = false;
 
 private:
-	std::map<std::string, int> calculateBalanceToTransport();
-	void spendCoins(City* city, std::map<std::string, int> &balanceToTransport);
+	std::map<country_t, int> calculateBalanceToTransport();
+	void spendCoins(City* city, std::map<country_t, int> &balanceToTransport);
 
 public:
 	~City() {};
-	City(std::string country, int x, int y) : country(country), x(x), y(y){
-		balance[country] = 1000000;
+	City(country_t country, int x, int y) : country(country), x(x), y(y){
+		balance[country] = INIT_BALANCE;
 	}
 
 	void sendCoins(map_t map);
