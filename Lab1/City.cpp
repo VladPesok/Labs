@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+constexpr auto TRANSMISSION_PERCENTAGE = 1000;
 
 void City::sendCoins(map_t map) {
 	std::map<country_t, int> balanceToTransport = calculateBalanceToTransport();
@@ -54,7 +55,7 @@ std::map<country_t, int> City::calculateBalanceToTransport()
 	std::map<country_t, int> balanceToTransport;
 	for (auto const& x : balance)
 	{
-		if (static_cast<int>(x.second / 1000) != 0) {
+		if (static_cast<int>(x.second / TRANSMISSION_PERCENTAGE) != 0) {
 			balanceToTransport[x.first] = cash;
 		}
 	}
